@@ -1,13 +1,17 @@
 {
   "name": "api-doc-gen",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Generate API Markdown documentation from JS comments",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rginestou/api-doc-gen"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "DaTA ENSTA",
+  "author": "Romain Ginestou",
   "license": "ISC",
   "dependencies": {
     "minimist": "^1.2.0"
