@@ -183,7 +183,7 @@ for (let group of groups) {
 	output += group[0] ? '# ' + group[0] + '\n\n' : ''
 	for (let route of group[1]) {
 		output += route.name ? '## ' + route.name + '\n\n' : ''
-		output += route.description ? route.description + '\n\n' : ''
+		output += route.description ? '### ' + route.description + '\n\n' : ''
 		output += route.method ? '\t' + route.method + ' ' + route.path + '\n\n' : ''
 
 		if (route.params.length > 0) {

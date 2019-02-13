@@ -8,7 +8,7 @@
 
 ## GetUser
 
-Request User information
+### Request User information
 
 	GET /
 
@@ -39,7 +39,7 @@ HTTP/1.1 404 Not Found
 
 ## AddUser
 
-Add User
+### Add User
 
 	POST /
 
