@@ -15,6 +15,7 @@
 		"no-mixed-operators": "off",
 		"object-curly-spacing": ["error", "always"],
 		"brace-style": ["error", "1tbs", { "allowSingleLine": false }],
-		"curly": ["error", "multi-or-nest", "consistent"]
+		"curly": ["error", "multi-or-nest", "consistent"],
+		"no-useless-escape": "off"
 	}
 }

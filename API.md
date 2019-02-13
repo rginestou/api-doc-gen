@@ -1,14 +1,16 @@
 # User Service API Documentation
 
 - [User](#user)
-	- [Request User information](#Request-User-information)
-	- [Add User](#Add-User)
+	- [GetUser](#GetUser)
+	- [AddUser](#AddUser)
 
 # User
 
 ## GetUser
 
-### Request User information
+Request User information
+
+
 
 	GET /
 
@@ -22,10 +24,11 @@
 
 Success-Response:
 
+**HTTP/1.1 200**
+
 ```json
-HTTP/1.1 200
 {
-  "id": "6d9e0b4c17bc"
+  "id": "6d9e0b4c17bc",
   "first_name": "John",
   "last_name": "Doe",
 }
@@ -35,13 +38,13 @@ HTTP/1.1 200
 
 User not found
 
-```json
-HTTP/1.1 404 Not Found
-```
+**HTTP/1.1 404 Not Found**
 
 ## AddUser
 
-### Add User
+Add User
+
+
 
 	POST /
 
@@ -51,15 +54,17 @@ HTTP/1.1 404 Not Found
 |------|------|-------------|
 | first_name | String | User first name |
 | last_name | String | User last name |
+| [age] | String | User last name |
 
 ### Success Response
 
 Success-Response:
 
+**HTTP/1.1 200**
+
 ```json
-HTTP/1.1 200
 {
-  "id": "6d9e0b4c17bc"
+  "id": "6d9e0b4c17bc",
   "first_name": "John",
   "last_name": "Doe",
 }
@@ -69,7 +74,5 @@ HTTP/1.1 200
 
 User not found
 
-```json
-HTTP/1.1 404 Not Found
-```
+**HTTP/1.1 404 Not Found**
 

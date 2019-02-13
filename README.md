@@ -2,12 +2,14 @@
 
 Generates API routes Markdown documententation by parsing file comments.
 
+Supports macro for fast and consistent documentation.
+
     node index.js --in example.js --out API.md --title "User Service"
 
 ```js
 /**
  * @apiDefine UserExample
- *   "id": "6d9e0b4c17bc"
+ *   "id": "6d9e0b4c17bc",
  *   "first_name": "John",
  *   "last_name": "Doe",
  */
@@ -17,11 +19,14 @@ Generates API routes Markdown documententation by parsing file comments.
  *
  * @apiError User not found
  *
- * HTTP/1.1 404 Not Found
+ * @apiStatus HTTP/1.1 404 Not Found
  */
 
 /**
- * @api {get} / Request User information
+ * @api {get} /
+ * @apiDescription
+ * Request User information
+ *
  * @apiName GetUser
  * @apiGroup User
  *
@@ -29,7 +34,7 @@ Generates API routes Markdown documententation by parsing file comments.
  *
  * @apiSuccess Success-Response:
  *
- * HTTP/1.1 200
+ * @apiStatus HTTP/1.1 200
  * {
  *  @apiUse UserExample
  * }
@@ -38,21 +43,24 @@ Generates API routes Markdown documententation by parsing file comments.
  */
 
 /**
- * @api {post} / Add User
+ * @api {post} /
+ * @apiDescription
+ * Add User
+ *
  * @apiName AddUser
  * @apiGroup User
  *
  * @apiParam {String} first_name User first name
  * @apiParam {String} last_name User last name
+ * @apiParam {String} [age] User last name
  *
  * @apiSuccess Success-Response:
  *
- * HTTP/1.1 200
+ * @apiStatus HTTP/1.1 200
  * {
  *  @apiUse UserExample
  * }
  *
  * @apiUse UserNotFoundError
  */
-
 ```

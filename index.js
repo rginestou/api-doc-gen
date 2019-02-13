@@ -36,6 +36,7 @@ while (l + 1 < content.length) {
 	// Start of comment block
 	if (line.startsWith('/**')) {
 		current_block = {
+			description: [],
 			params: [],
 			success: [],
 			errors: [],
@@ -82,13 +83,24 @@ while (l + 1 < content.length) {
 	}
 
 	// @api
-	regex = /@api {(\w+)} ([/\w]+) (.+)/g
+	regex = /@api {(\w+)} ([/\w]+)/g
 	match = regex.exec(line)
 	if (match) {
 		in_code = false
 		current_block.method = match[1].toUpperCase()
 		current_block.path = match[2]
-		current_block.description = match[3]
+		continue
+	}
+
+	// @apiDescription
+	regex = /@apiDescription/g
+	match = regex.exec(line)
+	if (match) {
+		in_code = true
+		in_type = "description"
+		current_block.description.push({
+			content: "",
+		})
 		continue
 	}
 
@@ -111,7 +123,7 @@ while (l + 1 < content.length) {
 	}
 
 	// @apiParam
-	regex = /@apiParam {(\w+)} (\w+) (.+)/g
+	regex = /@apiParam {(\w+)} ([\[\]\w]+) (.+)/g
 	match = regex.exec(line)
 	if (match) {
 		in_code = false
@@ -149,6 +161,15 @@ while (l + 1 < content.length) {
 		continue
 	}
 
+	// @apiStatus
+	regex = /@apiStatus (.+)/g
+	match = regex.exec(line)
+	if (match) {
+		let n = current_block[in_type].length
+		current_block[in_type][n - 1].status = match[1]
+		continue
+	}
+
 	if (in_code) {
 		if (line.startsWith(' * ')) {
 			let n = current_block[in_type].length
@@ -174,7 +195,7 @@ for (let group of groups) {
 	if (!group[0]) continue
 	output += '- [' + group[0] + '](#' + group[0].toLowerCase() + ')\n'
 	for (let route of group[1])
-		output += '\t- [' + route.description + '](#' + route.description.replace(/\s/g, '-') + ')\n'
+		output += '\t- [' + route.name + '](#' + route.name.replace(/\s/g, '-') + ')\n'
 }
 output += '\n'
 
@@ -183,7 +204,12 @@ for (let group of groups) {
 	output += group[0] ? '# ' + group[0] + '\n\n' : ''
 	for (let route of group[1]) {
 		output += route.name ? '## ' + route.name + '\n\n' : ''
-		output += route.description ? '### ' + route.description + '\n\n' : ''
+		if (route.description && route.description.length > 0) {
+			for (let desc of route.description) {
+				let d = desc.content.replace('\n', '\n\n')
+				output += d + '\n\n'
+			}
+		}
 		output += route.method ? '\t' + route.method + ' ' + route.path + '\n\n' : ''
 
 		if (route.params.length > 0) {
@@ -199,9 +225,13 @@ for (let group of groups) {
 			output += '### Success Response\n\n'
 			for (let success of route.success) {
 				output += success.title ? success.title + '\n\n' : ''
-				output += '```json\n'
-				output += success.content.trim() + '\n'
-				output += '```\n\n'
+				output += success.status ? '**' + success.status + '**\n\n' : ''
+				let c = success.content.trim()
+				if (c) {
+					output += '```json\n'
+					output += c + '\n'
+					output += '```\n\n'
+				}
 			}
 		}
 
@@ -209,9 +239,13 @@ for (let group of groups) {
 			output += '### Error Response\n\n'
 			for (let error of route.errors) {
 				output += error.title ? error.title + '\n\n' : ''
-				output += '```json\n'
-				output += error.content.trim() + '\n'
-				output += '```\n\n'
+				output += error.status ? '**' + error.status + '**\n\n' : ''
+				let c = error.content.trim()
+				if (c) {
+					output += '```json\n'
+					output += c + '\n'
+					output += '```\n\n'
+				}
 			}
 		}
 	}
