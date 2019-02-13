@@ -1,6 +1,6 @@
 {
   "name": "api-doc-gen",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Generate API Markdown documentation from JS comments",
   "main": "index.js",
   "scripts": {

@@ -38,7 +38,7 @@ while (l + 1 < content.length) {
 		current_block = {
 			params: [],
 			success: [],
-			error: [],
+			errors: [],
 		}
 		in_code = false
 		continue
@@ -141,8 +141,8 @@ while (l + 1 < content.length) {
 	match = regex.exec(line)
 	if (match) {
 		in_code = true
-		in_type = "success"
-		current_block.success.push({
+		in_type = "errors"
+		current_block.errors.push({
 			title: match[1],
 			content: "",
 		})
@@ -201,6 +201,16 @@ for (let group of groups) {
 				output += success.title ? success.title + '\n\n' : ''
 				output += '```json\n'
 				output += success.content.trim() + '\n'
+				output += '```\n\n'
+			}
+		}
+
+		if (route.errors.length > 0) {
+			output += '### Error Response\n\n'
+			for (let error of route.errors) {
+				output += error.title ? error.title + '\n\n' : ''
+				output += '```json\n'
+				output += error.content.trim() + '\n'
 				output += '```\n\n'
 			}
 		}

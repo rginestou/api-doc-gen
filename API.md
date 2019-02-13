@@ -31,6 +31,8 @@ HTTP/1.1 200
 }
 ```
 
+### Error Response
+
 User not found
 
 ```json
@@ -62,6 +64,8 @@ HTTP/1.1 200
   "last_name": "Doe",
 }
 ```
+
+### Error Response
 
 User not found
 
