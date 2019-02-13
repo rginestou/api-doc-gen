@@ -4,9 +4,11 @@
 	- [Request User information](#Request-User-information)
 	- [Add User](#Add-User)
 
-# GetUser
+# User
 
-## Request User information
+## GetUser
+
+Request User information
 
 	GET /
 
@@ -35,9 +37,9 @@ User not found
 HTTP/1.1 404 Not Found
 ```
 
-# AddUser
+## AddUser
 
-## Add User
+Add User
 
 	POST /
 
