@@ -1,6 +1,6 @@
 {
   "name": "api-doc-gen",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Generate API Markdown documentation from JS comments",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,6 @@
     "eslint-plugin-standard": "^4.0.0"
   },
   "bin": {
-    "api-gen-doc": "./index.js"
+    "api-doc-gen": "./index.js"
   }
 }
